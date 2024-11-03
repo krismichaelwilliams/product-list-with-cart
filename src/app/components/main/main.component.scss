@@ -1,0 +1,17 @@
+main {
+  display: flex;
+  gap: 2em;
+  padding: 5em;
+}
+
+.menu-container {
+  width: 70%;
+}
+
+.cart-container {
+  background-color: white;
+  width: 30%;
+  box-shadow: 0px 0px 15px hsl(13, 31%, 94%);
+  border-radius: 1em;
+  padding: 1em;
+}
