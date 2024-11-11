@@ -1,3 +1,11 @@
 .menu-title {
   font-size: 2.25em;
+  margin-bottom: 0.5em;
+}
+
+.container {
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: repeat(3, minmax(100px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
 }
