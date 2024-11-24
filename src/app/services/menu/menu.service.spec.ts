@@ -8,6 +8,7 @@ import {
 import { Random } from 'random-test-values';
 import { Image } from '../../models/image.model';
 import { MenuItem } from '../../models/menu-item.model';
+import { DessertItemSuccessResponse } from '../../models/responseModels/dessert-item-success-response.model';
 import { MenuService } from './menu.service';
 
 describe('MenuService', () => {
@@ -24,10 +25,12 @@ describe('MenuService', () => {
 
   it('should make a GET request to the menu api and return list of menu items', () => {
     // Arrange
-    let expectedResult = getFakeMenuItems(3);
+    let menuItems = getFakeMenuItems(3);
+    let expectedResult = toSuccessResponse(menuItems);
 
     // Act
     service.getDesserts().subscribe((response) => {
+      // Assert
       expect(response).toEqual(expectedResult);
     });
 
@@ -42,6 +45,13 @@ describe('MenuService', () => {
     httpMock.verify();
   });
 });
+
+function toSuccessResponse(menuItems: MenuItem[]): DessertItemSuccessResponse {
+  return {
+    status: 'success',
+    data: menuItems,
+  } satisfies DessertItemSuccessResponse;
+}
 
 function getFakeMenuItems(numberOfItems: number): MenuItem[] {
   let fakeMenuItems: MenuItem[] = [];
