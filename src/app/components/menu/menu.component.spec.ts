@@ -11,6 +11,7 @@ import { Random } from 'random-test-values';
 import { Subject, timer } from 'rxjs';
 import { Image } from '../../models/image.model';
 import { MenuItem } from '../../models/menu-item.model';
+import { DessertItemSuccessResponse } from '../../models/responseModels/dessert-item-success-response.model';
 import { MenuService } from '../../services/menu/menu.service';
 import { MenuComponent } from './menu.component';
 
@@ -18,11 +19,11 @@ describe('MenuComponent', () => {
   let component: MenuComponent;
   let fixture: ComponentFixture<MenuComponent>;
   let menuServiceSpy: jasmine.SpyObj<MenuService>;
-  let dessertsSubject: Subject<MenuItem[]>;
+  let dessertsSubject: Subject<DessertItemSuccessResponse>;
 
   beforeEach(async () => {
     menuServiceSpy = jasmine.createSpyObj('MenuService', ['getDesserts']);
-    dessertsSubject = new Subject<MenuItem[]>();
+    dessertsSubject = new Subject<DessertItemSuccessResponse>();
 
     // Arrange OnInit
     menuServiceSpy.getDesserts.and.returnValue(dessertsSubject);
@@ -48,18 +49,26 @@ describe('MenuComponent', () => {
   describe('ngOnInit', () => {
     it('should call menu service and return list of menu items', fakeAsync(() => {
       // Arrange
-      let menuItems = getFakeMenuItems(3);
+      let expectedResult = getFakeMenuItems(3);
+      let successResponse = toSuccessResponse(expectedResult);
 
       // Act
-      timer(1000).subscribe(() => dessertsSubject.next(menuItems));
+      timer(1000).subscribe(() => dessertsSubject.next(successResponse));
       tick(2000);
 
       // Assert
       expect(menuServiceSpy.getDesserts).toHaveBeenCalled();
-      expect(component.dessertItems).toEqual(menuItems);
+      expect(component.dessertItems).toEqual(expectedResult);
     }));
   });
 });
+
+function toSuccessResponse(menuItems: MenuItem[]): DessertItemSuccessResponse {
+  return {
+    status: 'success',
+    data: menuItems,
+  } satisfies DessertItemSuccessResponse;
+}
 
 function getFakeMenuItems(numberOfItems: number): MenuItem[] {
   let fakeMenuItems: MenuItem[] = [];

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MenuItem } from '../../models/menu-item.model';
+import { DessertItemSuccessResponse } from '../../models/responseModels/dessert-item-success-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,9 @@ import { MenuItem } from '../../models/menu-item.model';
 export class MenuService {
   constructor(private http: HttpClient) {}
 
-  getDesserts(): Observable<MenuItem[]> {
-    return this.http.get<MenuItem[]>('https://localhost:7113/desserts');
+  getDesserts(): Observable<DessertItemSuccessResponse> {
+    return this.http.get<DessertItemSuccessResponse>(
+      'https://localhost:7113/desserts'
+    );
   }
 }
