@@ -10,6 +10,7 @@
 .cart-title {
   color: hsl(14, 86%, 42%);
   font-size: 1.25em;
+  margin-bottom: 1em;
 }
 
 .empty-cart-container {
@@ -18,4 +19,60 @@
   font-size: 0.75em;
   font-weight: bold;
   color: hsl(18, 6%, 59%);
+}
+
+.cart-item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  border-bottom: 1px solid hsl(13, 31%, 94%);
+}
+
+.item-title {
+  font-weight: 500;
+  font-size: 0.8em;
+  margin-bottom: 0.75em;
+}
+
+.item-totals {
+  display: flex;
+  gap: 0.75em;
+  font-size: 0.8em;
+}
+
+.item-quantity {
+  color: hsl(14, 86%, 42%);
+  font-weight: 500;
+}
+
+.item-price {
+  color: hsl(18, 6%, 59%);
+}
+
+.item-total {
+  color: hsl(18, 6%, 50%);
+  font-weight: 700;
+}
+
+.btn-remove-item {
+  cursor: pointer;
+  text-align: center;
+  align-items: center;
+  height: 1.5em;
+  width: 1.5em;
+  border: 1px solid hsl(18, 6%, 59%);
+  border-radius: 50%;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.btn-remove-item:hover > img {
+  filter: invert(0%) sepia(0%) saturate(2500%) hue-rotate(240deg)
+    brightness(93%) contrast(100%);
+}
+
+.btn-remove-item:hover {
+  border: 1px solid black;
 }
