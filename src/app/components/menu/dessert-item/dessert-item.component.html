@@ -1,14 +1,23 @@
 <div class="container">
-  <img
-    class="desktop-img"
-    src="{{ dessertItem.image.desktop }}"
-    alt=""
-    srcset=""
-  />
-  <button class="btn-add-cart">
-    <img src="images/icon-add-to-cart.svg" />Add to Cart
+  <img class="desktop-img" [src]="dessertItem.image.desktop" />
+  @if(amountInCart === 0) {
+  <button (click)="addToCart()" class="btn btn-add-cart">
+    <img class="add-cart-icon" src="images/icon-add-to-cart.svg" />Add to Cart
   </button>
+  } @else {
+  <button class="btn btn-counter">
+    <div class="btn-container">
+      <a (click)="removeFromCart()" class="counter-icon"
+        ><img src="images/icon-decrement-quantity.svg" />
+      </a>
+      {{ amountInCart }}
+      <a (click)="addToCart()" class="counter-icon"
+        ><img src="images/icon-increment-quantity.svg" />
+      </a>
+    </div>
+  </button>
+  }
 </div>
 <p class="category">{{ dessertItem.category }}</p>
 <h1 class="dessert-name">{{ dessertItem.name }}</h1>
-<h2 class="price">${{ dessertItem.price }}</h2>
+<h2 class="price">{{ dessertItem.price | currency }}</h2>

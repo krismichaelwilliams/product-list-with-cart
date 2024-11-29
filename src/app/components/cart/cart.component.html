@@ -1,7 +1,23 @@
 <div class="container">
-  <h1 class="cart-title">Your Cart (0)</h1>
+  <h1 class="cart-title">Your Cart ({{ cartItems.length }})</h1>
+  @if ( cartItems.length === 0 ) {
   <div class="empty-cart-container">
     <img src="images/illustration-empty-cart.svg" alt="" />
     <p>Your added items will appear here</p>
   </div>
+  } @else { @for (item of cartItems; track item.name) {
+  <div class="cart-item-container">
+    <div class="item-details">
+      <h1 class="item-title">{{ item.name }}</h1>
+      <div class="item-totals">
+        <p class="item-quantity">{{ item.quantity }}x</p>
+        <p class="item-price">{{ "@" }}{{ item.price | currency }}</p>
+        <p class="item-total">{{ item.quantity * item.price | currency }}</p>
+      </div>
+    </div>
+    <button class="btn-remove-item">
+      <img class="remove-icon" src="images/icon-remove-item.svg" />
+    </button>
+  </div>
+  } }
 </div>
